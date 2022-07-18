@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Heading</h1>
+<p>My first paragraph.</p>
+
+
+<script>
+    const ws = new WebSocket("ws://localhost:8082");
+
+    ws.addEventListener("open",() => {
+        console.log("We are connected!!");
+
+        ws.send("I am client sending data to  server!!")
+    })
+
+</script>
+</body>
+</html>
