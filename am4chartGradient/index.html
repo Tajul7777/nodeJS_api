@@ -96,7 +96,7 @@ columnTemplate.strokeWidth = 1;
 
 //columnTemplate.strokeOpacity = .32;
 
-function getVerticalColorToTransparentGradient(color, rotation) {
+function getVerticalColorToTransparentGradients(color, rotation) {
  
 
 var gradient = new am4core.LinearGradient();
@@ -113,22 +113,6 @@ gradient.addColor(color, 0, 0.32);
 return gradient;
 }
 
-// This method will not work, it appends the colors to an existent list
-// var colors = ['#2776BD', '#00A1D0','#00C195','#7ED321','#A8C600','#C9B600','#E3A600', '#F7941E', '#FC7149'];
-// colors.forEach(function(hex) {
-//   chart.colors.list.push(am4core.color(hex));
-// });
-
-// This method works because we manually override the chart's ColorSet
-// @link https://www.amcharts.com/docs/v4/concepts/colors/#XY_Chart_and_derivative_charts
-// var colors = ['#2776BD', '#00A1D0','#00C195','#7ED321','#A8C600','#C9B600','#E3A600', '#F7941E', '#FC7149'];
-// var am4colors = [];
-// colors.forEach(function(hex) {
-//   am4colors.push(am4core.color(hex)); 
-// });
-// chart.colors.list = am4colors;
-
-// This is the same as the above
 chart.colors.list = [
             am4core.color("#006ed8")
 ];
@@ -137,7 +121,7 @@ series.columns.template.events.once("inited", function(event){
     var color = chart.colors.getIndex(event.target.dataItem.index % 1);
     event.target.stroke = color;
     var gradientRotation = 90;
-    event.target.fill = self.getVerticalColorToTransparentGradient(color, gradientRotation);
+    event.target.fill = self.getVerticalColorToTransparentGradients(color, gradientRotation);
 });
         </script>
     </body>
