@@ -1,0 +1,41 @@
+
+<html>
+    <head>
+        <script src="https://www.amcharts.com/lib/4/core.js"></script>
+        <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+        <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+       
+        <style>
+            body {
+         background-color: #0d191f;
+         color: #d5e5ef;
+        }        
+        #chartdiv {
+          width: 50%;
+          height: 250px;
+          background-color: #263239;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="chartdiv"></div>
+
+        <script type="">
+// constructor function
+function Person () {
+  this.name = 'John',
+  this.age = 23
+}
+
+// creating objects
+let person1 = new Person();
+let person2 = new Person();
+
+// adding new property to constructor function
+Person.prototype.gender = 'Male';
+
+console.log(person1.gender); // Male
+console.log(person2.gender); // Male
+</script>
+    </body>
+</html>
