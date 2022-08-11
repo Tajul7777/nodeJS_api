@@ -1,3 +1,4 @@
+
 for (i = 0; i< overviewData.dailyYieldData.length;i++){
   //var years = new Date(overviewData.dailyYieldData[i][0]).getUTCDate();
   var date = new Date(overviewData.dailyYieldData[i][0]).toLocaleString("en-US", {day: "2-digit"});

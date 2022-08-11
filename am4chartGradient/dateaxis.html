@@ -22,32 +22,29 @@
     </body>
 <script>
 
-// Themes begin
-am4core.useTheme(am4themes_animated);
-// Themes end
-
+// Create chart instance
 var chart = am4core.create("chartdiv", am4charts.XYChart);
-chart.paddingRight = 40;
 
-var data = [];
-var value = 50;
-for (let i = -3650; i < 0; i++) {
-  let date = new Date();
-  date.setHours(0, 0, 0, 0);
-  date.setDate(i);
-  value -= Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 10);
-  if (value < 0) {
-    value = Math.round(Math.random() * 10);
-  }
-  data.push({ date: date, value: value });
-}
+// Add data
+chart.data = [{
+  "date": new Date(2018, 3, 20),
+  "value": 90
+}, {
+  "date": new Date(2018, 3, 21),
+  "value": 102
+}, {
+  "date": new Date(2018, 3, 22),
+  "value": 65
+}];
 
-chart.data = data;
 
 // Create axes
 var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-dateAxis.renderer.minGridDistance = 60;
-dateAxis.groupData = true;
+dateAxis.renderer.minGridDistance = 30;
+
+// Set date label formatting
+dateAxis.dateFormats.setKey("day", "MMMM dt");
+dateAxis.periodChangeDateFormats.setKey("month", "[bold]yyyy[/]");
 
 var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 
@@ -55,12 +52,10 @@ var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 var series = chart.series.push(new am4charts.ColumnSeries());
 series.dataFields.valueY = "value";
 series.dataFields.dateX = "date";
-series.tooltipText = "{value}"
+series.name = "Sales";
 
-series.tooltip.pointerOrientation = "vertical";
-
-chart.cursor = new am4charts.XYCursor();
-
+// Create scrollbars
 chart.scrollbarX = new am4core.Scrollbar();
+chart.scrollbarY = new am4core.Scrollbar();
 </script>
 </html>
