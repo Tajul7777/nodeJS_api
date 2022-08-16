@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <script src="https://www.amcharts.com/lib/4/core.js"></script>
+        <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+        <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+        <script src="index.js"></script>
+        <style>
+            body {
+        
+         color: #d5e5ef;
+        }       
+        #chartdiv {
+          width: 50%;
+          height: 250px;
+          
+        }
+        </style>
+    </head>
+    <body>
+        <div id="chartdiv"></div>
+        <h2 id="demo"></h2>
+    </body>
+<script>
+// mixin
+let sayHiMixin = {
+    sayHi() {
+      alert(`Hello ${this.name}`);
+    },
+    sayBye() {
+      console.log((`Bye ${this.name}`));
+    }
+  };
+
+  class User {
+    constructor(name) {
+      this.name = name;
+    }
+  }
+  
+  // copy the methods
+  Object.assign(User.prototype, sayHiMixin);
+  
+  // now User can say hi
+  new User("Dude").sayHi(); // Hello Dude!
+  new User("Dude").sayBye(); // Hello Dude!
+</script>
+</html>
