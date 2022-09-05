@@ -54,6 +54,18 @@ series.dataFields.valueY = "value";
 series.dataFields.dateX = "date";
 series.name = "Sales";
 
+
+//label text
+var text = chart.plotContainer.createChild(am4core.Label);
+text.text = axisLabelYearlyEnergyYield;
+text.y = 5;
+text.fill = "#006ed8";
+text.x = am4core.percent(5);
+text.horizontalCenter = "left";
+text.zIndex = -100;
+text.fillOpacity = 0.7;
+
+
 //Chart Cursor
 chart.cursor = new am4charts.XYCursor();
 chart.cursor.behavior = 'zoomXY';
