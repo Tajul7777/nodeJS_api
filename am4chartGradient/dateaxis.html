@@ -54,6 +54,19 @@ series.dataFields.valueY = "value";
 series.dataFields.dateX = "date";
 series.name = "Sales";
 
+//Chart Cursor
+chart.cursor = new am4charts.XYCursor();
+chart.cursor.behavior = 'zoomXY';
+chart.cursor.lineX.stroke = chartDefaults.cursorColor; 
+chart.cursor.lineY.stroke = chartDefaults.cursorColor; 
+chart.cursor.behavior = "selectX";
+chart.cursor.lineX.stroke = "#d5e5ef";
+chart.cursor.lineX.strokeOpacity = 1;
+chart.cursor.lineX.strokeDasharray = "";
+chart.cursor.lineY.stroke = "#d5e5ef";
+chart.cursor.lineY.strokeOpacity = 1;
+chart.cursor.lineY.strokeDasharray = "";
+
 // Create scrollbars
 chart.scrollbarX = new am4core.Scrollbar();
 chart.scrollbarY = new am4core.Scrollbar();
