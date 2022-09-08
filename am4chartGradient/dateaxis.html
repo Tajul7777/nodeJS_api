@@ -42,24 +42,19 @@ chart.data = [{
   "value": 65
 }];
 
-
 // Create axes
 var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
 dateAxis.renderer.minGridDistance = 30;
-
 // Set date label formatting
 dateAxis.dateFormats.setKey("day", "MMMM dt");
 dateAxis.periodChangeDateFormats.setKey("month", "[bold]yyyy[/]");
 
 var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-
 // Create series
 var series = chart.series.push(new am4charts.ColumnSeries());
 series.dataFields.valueY = "value";
 series.dataFields.dateX = "date";
 series.name = "Sales";
-
-
 //label text
 var text = chart.plotContainer.createChild(am4core.Label);
 text.text = axisLabelYearlyEnergyYield;
