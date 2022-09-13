@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <p id="data"></p>
+  <p id="data2"></p>
+
+<script>
+
+let job = {
+    jobTitle: 'JavaScript Developer',
+    country: 'USA'
+};
+
+let location2 = {
+    city: 'London',
+    country: 'England'
+};
+
+let remoteJob = {
+    ...job,
+    ...location2
+};
+
+//document.getElementById("data").innerText = remoteJob;
+console.log(remoteJob);
+</script>
+
+</body>
+</html>
