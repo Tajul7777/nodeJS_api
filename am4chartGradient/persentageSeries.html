@@ -67,7 +67,16 @@ valueAxis.numberFormatter = new am4core.NumberFormatter();
 valueAxis.numberFormatter.numberFormat = "#.#";
 
 // Create series
-function createSeries(field, name) {
+function createSeries(field, name, color) {
+  // This is the same as the above
+chart.colors.list = [
+  am4core.color("#006ed8"),
+  am4core.color("#9fc41e"),
+  am4core.color("#FF6F91"),
+  am4core.color("#FF9671"),
+  am4core.color("#FFC75F"),
+  am4core.color("#F9F871")
+];
   
   // Set up series
   var series = chart.series.push(new am4charts.ColumnSeries());
@@ -82,7 +91,7 @@ function createSeries(field, name) {
   series.stacked = true;
   
   // Configure columns
-  series.columns.template.width = am4core.percent(60);
+  series.columns.template.width = am4core.percent(20);
   series.columns.template.tooltipText = "[bold]{name}[/]\n[font-size:14px]{categoryX}: [bold]{valueY.percent}%[/] ({valueY}M)";
   
   // Configure legend
@@ -95,12 +104,17 @@ function createSeries(field, name) {
   labelBullet.locationY = 0.5;
   labelBullet.label.fill = am4core.color("#fff");
 
-  series.columns.template.events.once("inited", function(event){
-    var color = chart.colors.getIndex(event.target.dataItem.index % 1);
+  if(field === "dcValue"){
+  series.columns.template.fill = am4core.color("#fff");
+  //series.columns.template.stroke = am4core.color("#fff");
+  }else{
+    series.columns.template.events.once("inited", function(event){
+    var color = chart.colors.getIndex(event.target.dataItem.index % 3);
     event.target.stroke = color;
     var gradientRotation = 90;
     event.target.fill = self.getVerticalColorToTransparentGradients(color, gradientRotation);
 });
+  }
   
   return series;
 }
@@ -121,16 +135,13 @@ function getVerticalColorToTransparentGradients(color, rotation) {
  return gradient;
  }
  
- chart.colors.list = [
-             am4core.color("#006ed8")
- ];
 
-createSeries("acValue", "Europe");
-createSeries("dcValue", "North America");
-createSeries("radiationValue", "Asia-Pacific");
-createSeries("maxRadiation", "Latin America");
-createSeries("performanceRatio", "Middle-East");
-createSeries("totalPR", "Africa");
+createSeries("acValue", "Europe","#006ed8");
+createSeries("dcValue", "North America", "");
+createSeries("radiationValue", "Asia-Pacific","#9fc41e");
+createSeries("maxRadiation", "Latin America", "");
+createSeries("performanceRatio", "Middle-East","#ed7b00");
+createSeries("totalPR", "Africa","");
 
 // Legend
 chart.legend = new am4charts.Legend();
