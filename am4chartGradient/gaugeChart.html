@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<style>
+    body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+#chartdiv {
+  width: 100%;
+  height: 200px;
+}
+</style>
+<body>
+    <div id="chartdiv"></div>	
+  <script>
+
+/**
+ * ---------------------------------------
+ * This demo was created using amCharts 4.
+ * 
+ * For more information visit:
+ * https://www.amcharts.com/
+ * 
+ * Documentation is available at:
+ * https://www.amcharts.com/docs/v4/
+ * ---------------------------------------
+ */
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+// create chart
+var chart = am4core.create("chartdiv", am4charts.GaugeChart);
+chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+
+chart.innerRadius = -40;
+
+var axis = chart.xAxes.push(new am4charts.ValueAxis());
+axis.min = 0;
+axis.max = 100;
+axis.strictMinMax = true;
+axis.renderer.grid.template.disabled = true;
+axis.renderer.labels.template.disabled = true;
+
+var rangeMin = axis.axisRanges.create();
+rangeMin.value = axis.min;
+rangeMin.label.text = "" + axis.min; // converting to string
+
+var rangeMax = axis.axisRanges.create();
+rangeMax.value = axis.max;
+rangeMax.label.text = "" + axis.max; // converting to string
+
+var colorSet = new am4core.ColorSet();
+
+var range0 = axis.axisRanges.create();
+range0.value = 0;
+range0.endValue = 50;
+range0.axisFill.fillOpacity = 1;
+range0.axisFill.fill = colorSet.getIndex(0);
+range0.axisFill.zIndex = - 1;
+
+var range1 = axis.axisRanges.create();
+range1.value = 50;
+range1.endValue = 80;
+range1.axisFill.fillOpacity = 1;
+range1.axisFill.fill = colorSet.getIndex(2);
+range1.axisFill.zIndex = -1;
+
+var range2 = axis.axisRanges.create();
+range2.value = 80;
+range2.endValue = 100;
+range2.axisFill.fillOpacity = 1;
+range2.axisFill.fill = colorSet.getIndex(4);
+range2.axisFill.zIndex = -1;
+
+var hand = chart.hands.push(new am4charts.ClockHand());
+
+// using chart.setTimeout method as the timeout will be disposed together with a chart
+chart.setTimeout(randomValue, 2000);
+
+function randomValue() {
+    hand.showValue(Math.random() * 100, 1000, am4core.ease.cubicOut);
+    chart.setTimeout(randomValue, 2000);
+}
+</script>
+
+</body>
+</html>
