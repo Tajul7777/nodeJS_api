@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+<style>
+    #chartdiv {
+      width: 50%;
+      height: 100;
+    </style>
+<body>
+    <div id="chartdiv"></div>
+  <script>
+
+/**
+ * ---------------------------------------
+ * This demo was created using amCharts 4.
+ *
+ * For more information visit:
+ * https://www.amcharts.com/
+ *
+ * Documentation is available at:
+ * https://www.amcharts.com/docs/v4/
+ * ---------------------------------------
+ */
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+// Create chart instance
+var chart = am4core.create("chartdiv", am4charts.XYChart);
+chart.plotContainer.stroke = am4core.color('#f5d047');
+chart.plotContainer.strokeOpacity = 1;
+chart.plotContainer.strokeWidth = 1.5;
+
+// Add data
+chart.data = [
+  {
+    type: "gauge",
+    good: 8,
+  }
+];
+
+// Create axes
+var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "type";
+categoryAxis.renderer.grid.template.location = 0;
+categoryAxis.renderer.minGridDistance = 20;
+// forcefully widended axis to make it look like gauge
+categoryAxis.renderer.grid.template.disabled = true;
+categoryAxis.renderer.inversed = false;
+
+categoryAxis.renderer.cellStartLocation = -0.12;
+categoryAxis.renderer.cellEndLocation = 1.12;
+categoryAxis.visible = false;
+
+var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
+valueAxis.min = 0;
+valueAxis.max = 10;
+valueAxis.visible = false;
+valueAxis.renderer.grid.template.disabled = true;
+valueAxis.renderer.opposite = false;
+
+// Create series
+function createSeries(field, name, stacked) {
+  var series = chart.series.push(new am4charts.ColumnSeries());
+  series.dataFields.valueX = field;
+  series.dataFields.categoryY = "type";
+  series.name = name;
+  // series.columns.template.tooltipText = "{name}: [bold]{valueX[/]}";
+  
+  var gradient = new am4core.LinearGradient();
+  gradient.rotation = 180;
+  gradient.addColor(am4core.color('#f5d047'));
+  gradient.addColor(am4core.color('#f5d047'), 0, 0.32);
+  
+  series.columns.template.fill = gradient;
+  series.columns.template.strokeWidth = 0;
+  
+  // series.stacked = stacked;
+  const bullet = series.bullets.push(new am4charts.LabelBullet());
+  bullet.locationX = 0.5;
+}
+
+createSeries("good", "Good", false);
+</script>
+
+</body>
+</html>
