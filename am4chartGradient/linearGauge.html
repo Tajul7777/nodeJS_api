@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+<style>
+    #chartdiv {
+      width: 100%;
+      height: 400px;
+    }
+    </style>
+<body>
+    <div id="chartdiv"></div>
+  <script>
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+// Create chart instance
+var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+// Add data
+chart.data = [
+  {
+    type: "gauge",
+    bad: 2,
+    good: 7,
+    worst: 1
+  }
+];
+
+// Create axes
+var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "type";
+categoryAxis.renderer.grid.template.location = 0;
+categoryAxis.renderer.minGridDistance = 20;
+// forcefully expand axis to make it look like gauge
+categoryAxis.renderer.cellStartLocation = -0.12;
+categoryAxis.renderer.cellEndLocation = 1.12;
+categoryAxis.visible = false;
+
+var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
+// remove inner margins by syncing its start and end with min and max
+valueAxis.min = 0;
+valueAxis.max = 10;
+
+// Create series
+function createSeries(field, name, stacked) {
+  var series = chart.series.push(new am4charts.ColumnSeries());
+  series.dataFields.valueX = field;
+  series.dataFields.categoryY = "type";
+  series.name = name;
+  series.columns.template.tooltipText = "{name}: [bold]{valueX[/]}";
+  series.stacked = stacked;
+  // add inner text
+  const bullet = series.bullets.push(new am4charts.LabelBullet());
+  bullet.label.text = "{name}";
+  bullet.locationX = 0.5;
+}
+
+createSeries("good", "Good", false); // base of stacked column
+createSeries("bad", "Bad", true);
+createSeries("worst", "Worst", true);
+
+// Add legend
+chart.legend = new am4charts.Legend();
+</script>
+
+</body>
+</html>
